@@ -1,11 +1,8 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { AuthProvider } from '@/contexts/auth/auth.context'
-import { DataServiceProvider } from '@/contexts/service/data.context'
 import { Login } from '@/app/_components/login'
-import { LoginModalProvider } from '@/components/app/login/context/login-modal.context'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ClientProviders } from '@/contexts/utils/client-providers'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,21 +24,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const queryClient = new QueryClient()
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <AuthProvider>
-          <DataServiceProvider>
-            <LoginModalProvider>
-              <QueryClientProvider client={queryClient}>
-                <Login />
-                {children}
-              </QueryClientProvider>
-            </LoginModalProvider>
-          </DataServiceProvider>
-        </AuthProvider>
+        <ClientProviders>
+          <Login />
+          {children}
+        </ClientProviders>
       </body>
     </html>
   )
