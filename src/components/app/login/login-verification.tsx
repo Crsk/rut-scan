@@ -3,13 +3,13 @@ import { REGEXP_ONLY_DIGITS } from 'input-otp'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
-import { useDataService } from '@/contexts/service/data.context'
 import { useLoginModal } from '@/components/app/login/context/login-modal.context'
+import { useAddUser } from '@/features/users/hooks/use-add-user'
 
 export const LoginVerification = () => {
-  const { setStep, verify, setErrorMessage, email } = useLoginModal()
-  const { userService } = useDataService()
+  const { setStep, verify, setErrorMessage } = useLoginModal()
   const { setUser } = useAuth()
+  const { mutate: addUser } = useAddUser()
 
   return (
     <div className="flex flex-col mt-5">
@@ -19,7 +19,7 @@ export const LoginVerification = () => {
         onChange={async pin => {
           const { success, email, id } = await verify(pin)
           if (success && id) {
-            userService.add({ json: { id, email } })
+            addUser({ json: { id, email } })
             setUser({ id, email })
           }
         }}
