@@ -4,7 +4,7 @@ import { LoginDialog } from '@/components/app/login/login-dialog'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
 
-export const Login = () => {
+export const TopBar = () => {
   const { user, logout } = useAuth()
   const { setOpen } = useLoginModal()
 
