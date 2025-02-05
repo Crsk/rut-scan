@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
 import { HomeIcon, Plus } from 'lucide-react'
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 export const TopBar = () => {
   const { authUser, logout } = useAuth()
@@ -19,7 +19,7 @@ export const TopBar = () => {
     <>
       <LoginDialog />
       <CreateAdminDialog />
-      <div className="w-screen pt-6 px-8">
+      <div className="fixed w-screen py-6 px-8 bg-white z-10">
         <div className="flex justify-between">
           <div className="flex items-center">
             {pathname !== '/' && (
