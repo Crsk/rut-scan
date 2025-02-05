@@ -5,6 +5,7 @@ import { AuthProvider } from '@/contexts/auth/auth.context'
 import { DataServiceProvider } from '@/contexts/service/data.context'
 import { Login } from '@/app/_components/login'
 import { LoginModalProvider } from '@/components/app/login/context/login-modal.context'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,14 +27,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const queryClient = new QueryClient()
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AuthProvider>
           <DataServiceProvider>
             <LoginModalProvider>
-              <Login />
-              {children}
+              <QueryClientProvider client={queryClient}>
+                <Login />
+                {children}
+              </QueryClientProvider>
             </LoginModalProvider>
           </DataServiceProvider>
         </AuthProvider>
