@@ -23,12 +23,14 @@ export class UserService implements IUserService {
     const user = createUser({ id, ...json })
     const snakeUser = objectToSnake(user)
 
-    this.repository.add({ json: snakeUser })
+    await this.repository.add({ json: snakeUser })
   }
 
   async update({ id, updated }: { id: string; updated: Partial<UserProps> }) {
-    this.repository.update({ id, updated: objectToSnake(updated) })
+    await this.repository.update({ id, updated: objectToSnake(updated) })
   }
 
-  async delete() {}
+  async delete({ id }: { id: string }) {
+    await this.repository.delete({ id })
+  }
 }

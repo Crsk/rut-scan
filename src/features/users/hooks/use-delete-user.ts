@@ -1,13 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { UserProps } from '@/core/domain/user/user-props.interface'
 import { useDataService } from '@/contexts/service/data.context'
 
-export const useAddUser = () => {
+export const useDeleteUser = () => {
   const { userService } = useDataService()
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async ({ json }: { json: Partial<UserProps> }) => await userService.add({ json }),
+    mutationFn: async ({ id }: { id: string }) => await userService.delete({ id }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] })
   })
 }

@@ -24,8 +24,10 @@ export class UserRepository implements IUserRepository {
   }
 
   async update({ id, updated }: { id: string; updated: Partial<SnakeCase<UserProps>> }) {
-    this.client.from('users').update(updated).eq('id', id).select()
+    await this.client.from('users').update(updated).eq('id', id).select()
   }
 
-  async delete() {}
+  async delete({ id }: { id: string }) {
+    await this.client.from('users').delete({ count: 'exact' }).eq('id', id)
+  }
 }

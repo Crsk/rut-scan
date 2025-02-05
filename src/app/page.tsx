@@ -1,6 +1,7 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
+import Link from 'next/link'
 
 export default function Home() {
   const { authUser } = useAuth()
@@ -14,7 +15,7 @@ export default function Home() {
 
           {authUser?.email && (
             <Button size="lg" variant="secondary">
-              Administrar Socios
+              <Link href="/socios">Administrar Socios</Link>
             </Button>
           )}
         </div>

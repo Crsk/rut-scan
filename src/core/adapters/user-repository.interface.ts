@@ -13,7 +13,7 @@ export interface _UserRepository {
 export interface _UserService {
   get({ email }: { email: string }): UserProps | undefined
   getAll(): UserProps[]
-  add({ json }: { json: UserProps }): void
+  add({ json }: { json: Partial<UserProps> }): void
   update({ id, updated }: { id: string; updated: Partial<UserProps> }): void
   delete({ id }: { id: string }): void
 }
