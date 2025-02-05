@@ -8,7 +8,7 @@ import { useAddUser } from '@/features/users/hooks/use-add-user'
 
 export const LoginVerification = () => {
   const { setStep, verify, setErrorMessage } = useLoginModal()
-  const { setUser } = useAuth()
+  const { setAuthUser } = useAuth()
   const { mutate: addUser } = useAddUser()
 
   return (
@@ -20,7 +20,7 @@ export const LoginVerification = () => {
           const { success, email, id } = await verify(pin)
           if (success && id) {
             addUser({ json: { id, email } })
-            setUser({ id, email })
+            setAuthUser({ id, email })
           }
         }}
       >

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
 
 export const TopBar = () => {
-  const { user, logout } = useAuth()
+  const { authUser, logout } = useAuth()
   const { setOpen } = useLoginModal()
 
   return (
@@ -14,14 +14,14 @@ export const TopBar = () => {
       <div className="w-screen flex justify-end pt-6 pr-8">
         <div className="flex gap-4 items-center">
           <div className="flex gap-2">
-            {user?.email && (
+            {authUser?.email && (
               <>
                 <span>👋</span>
-                <span>{user?.email}</span>
+                <span>{authUser?.email}</span>
               </>
             )}
           </div>
-          {user?.email ? (
+          {authUser?.email ? (
             <Button variant="secondary" onClick={logout}>
               Logout
             </Button>

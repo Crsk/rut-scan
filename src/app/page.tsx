@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
 
 export default function Home() {
-  const { user } = useAuth()
+  const { authUser } = useAuth()
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)] pb-36">
@@ -12,7 +12,7 @@ export default function Home() {
         <div className="flex gap-4">
           <Button size="lg">Validar Acceso</Button>
 
-          {user?.email && (
+          {authUser?.email && (
             <Button size="lg" variant="secondary">
               Administrar Socios
             </Button>

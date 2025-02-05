@@ -1,8 +1,8 @@
 import { Session } from '@supabase/supabase-js'
 
 export type UseAuth = {
-  user: null | { id: string; email: string }
-  setUser: (user: null | { id: string; email: string }) => void
+  authUser: null | { id: string; email: string }
+  setAuthUser: (user: null | { id: string; email: string }) => void
   signInWithEmail: ({ email }: { email: string }) => Promise<{ error: Error | null }>
   verifyCode: ({
     email,
