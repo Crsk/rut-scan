@@ -11,7 +11,7 @@ vi.mock('@/utils/generate-id', () => ({
   generateId: () => 'test-id'
 }))
 
-describe.only('UserService', () => {
+describe('UserService', () => {
   let repository: UserRepository
   let service: IUserService
 
