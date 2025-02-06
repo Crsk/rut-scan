@@ -6,5 +6,5 @@ export interface UserProps extends Base {
   rut?: string
   family?: any // TODO jsonb
   position?: string
-  isAdmin?: boolean
+  roles?: ('ADMIN' | 'SUPER_ADMIN' | 'USER' | 'PARTNER')[]
 }

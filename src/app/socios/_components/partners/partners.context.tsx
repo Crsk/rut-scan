@@ -27,8 +27,7 @@ const useManagePartnersController = () => {
     const partner: Partial<UserProps> = {
       name,
       rut,
-      isAdmin: false,
-      isSuperAdmin: false
+      roles: ['PARTNER']
     }
 
     addUser({ json: partner })

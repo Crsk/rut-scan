@@ -23,7 +23,7 @@ export const CreateAdminDialog = () => {
 
   const createAdmin = () => {
     // TODO: this does not authenticate the user
-    addUser({ json: { email, isAdmin: true, isSuperAdmin: false } })
+    addUser({ json: { email, roles: ['ADMIN', 'PARTNER'] } })
   }
 
   return (

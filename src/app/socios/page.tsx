@@ -13,7 +13,7 @@ const Partners = () => {
   useEffect(() => {
     if (!users) return
 
-    const _partners: UserProps[] = users.filter(user => !user.isAdmin && !user.isSuperAdmin)
+    const _partners: UserProps[] = users.filter(user => user.roles?.includes('PARTNER'))
     setPartners(_partners)
   }, [users])
 
