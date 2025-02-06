@@ -1,6 +1,6 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react'
-import { Scanner } from './_components/scanner'
+import { Scanner } from '@yudiel/react-qr-scanner'
 import { getRunFromUrl } from './_utils/get-run-from-url'
 import { useUserByRut } from '@/domain/users/hooks/use-user-by-rut'
 import { useRouter } from 'next/navigation'
@@ -27,7 +27,7 @@ const Page = () => {
 
   return (
     <div className="pt-20">
-      <Scanner fps={10} qrbox={250} disableFlip={true} qrCodeSuccessCallback={onNewScanResult} />
+      <Scanner onScan={result => onNewScanResult(result[0].rawValue)} />
     </div>
   )
 }
