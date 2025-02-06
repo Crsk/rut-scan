@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Trash } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Switch } from '@/components/ui/switch'
+/* import { Switch } from '@/components/ui/switch' */
 import { useManagePartners } from '@/app/socios/_components/partners/partners.context'
 
 export const ManagePartners = ({ canManage }: { canManage: boolean }) => {
@@ -14,7 +14,7 @@ export const ManagePartners = ({ canManage }: { canManage: boolean }) => {
         <TableRow>
           <TableHead>Nombre</TableHead>
           <TableHead className="w-[200px]">RUT</TableHead>
-          {canManage && <TableHead className="text-right w-[100px]">Activo</TableHead>}
+          {/* {canManage && <TableHead className="text-right w-[100px]">Activo</TableHead>} */}
           {canManage && <TableHead className="text-right w-[100px]">Borrar</TableHead>}
         </TableRow>
       </TableHeader>
@@ -24,11 +24,11 @@ export const ManagePartners = ({ canManage }: { canManage: boolean }) => {
             <TableRow key={partner.id}>
               <TableCell>{partner.name}</TableCell>
               <TableCell>{partner.rut}</TableCell>
-              {canManage && (
+              {/* {canManage && (
                 <TableCell className="text-right">
                   <Switch />
                 </TableCell>
-              )}
+              )} */}
               {canManage && (
                 <TableCell className="text-right">
                   <Button
