@@ -18,7 +18,7 @@ export class ServiceLocator {
     this.services.set(key, service)
   }
 
-  exists<T>(key: symbol): boolean {
+  exists(key: symbol): boolean {
     return !!this.services.get(key)
   }
 

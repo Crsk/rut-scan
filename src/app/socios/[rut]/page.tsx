@@ -7,7 +7,7 @@ import { Eye, HomeIcon, QrCode } from 'lucide-react'
 
 const Page = () => {
   const { rut } = useParams<{ rut: string }>()
-  const { data: partner, isPending } = !!rut ? useUserByRut({ rut }) : { data: null, isPending: null }
+  const { data: partner, isPending } = useUserByRut({ rut })
 
   if (isPending)
     return (
@@ -50,10 +50,10 @@ const Page = () => {
       <div className="fixed overflow-hidden w-screen h-screen bg-red-700 text-red-100 pb-20 transition-all duration-500">
         <div className="flex flex-col h-full justify-center items-center gap-16">
           <div className="flex flex-col items-center gap-4">
-            <h1 className="text-3xl font-bold">Sociono no encontrado</h1>
+            <h1 className="text-3xl font-bold">Socio no encontrado</h1>
             <p>RUT: {rut}</p>
           </div>
-          <div className="flex gap-8">
+          <div className="flex gap-8 items-center flex-col md:flex-row ">
             <Link href="/">
               <Button variant="secondary">
                 <HomeIcon /> Inicio

@@ -1,18 +1,18 @@
 'use client'
-import { useCreateAdminModal } from '@/components/app/create-admin/context/create-admin-modal.context'
+/* import { useCreateAdminModal } from '@/components/app/create-admin/context/create-admin-modal.context' */
 import { CreateAdminDialog } from '@/components/app/create-admin/create-admin-dialog'
 import { useLoginModal } from '@/components/app/login/context/login-modal.context'
 import { LoginDialog } from '@/components/app/login/login-dialog'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
-import { HomeIcon, Plus } from 'lucide-react'
+import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 
 export const TopBar = () => {
   const { authUser, logout } = useAuth()
   const { setOpen: setLoginModalOpen } = useLoginModal()
-  const { setOpen: setCreateAdminModalOpen } = useCreateAdminModal()
+  /* const { setOpen: setCreateAdminModalOpen } = useCreateAdminModal() */
   const pathname = usePathname()
   const { rut } = useParams<{ rut: string }>()
 
@@ -33,7 +33,7 @@ export const TopBar = () => {
           </div>
           <div className="flex gap-4 items-center">
             <div className="flex gap-2">
-              {authUser?.email && (
+              {authUser?.email && pathname === '/' && (
                 <>
                   <span>👋</span>
                   <span>{authUser?.email}</span>
@@ -46,7 +46,7 @@ export const TopBar = () => {
               </Button>
             ) : (
               <Button variant="outline" onClick={() => setLoginModalOpen(true)}>
-                Login
+                Admin
               </Button>
             )}
             {/* TODO: Allow users to create admin users */}

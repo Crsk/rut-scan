@@ -11,7 +11,7 @@ export const LoginEmail = () => {
   const handleSubmit = useCallback(async () => {
     setEmail(email)
     sendCode()
-  }, [email])
+  }, [email, sendCode, setEmail])
 
   return (
     <div className="flex flex-nowrap gap-4 items-end w-full">

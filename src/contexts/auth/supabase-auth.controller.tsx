@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react'
 import { UseAuth } from './use-auth.type'
 
 export const useSupabaseAuthController = (): UseAuth => {
-  const [authUser, setAuthUser] = useState<any | { id: string; email: string }>(null) // TODO rename to authUser
+  const [authUser, setAuthUser] = useState<any | { id: string; email: string }>(null)
   const supabaseClient = getClient()
 
   useEffect(() => {
-    const { data: authListener } = supabaseClient.auth.onAuthStateChange((_, session) => {
+    const { data: authListener } = supabaseClient.auth.onAuthStateChange((_: any, session: any) => {
       if (session?.user) {
         setAuthUser(session.user)
       } else {
@@ -18,7 +18,7 @@ export const useSupabaseAuthController = (): UseAuth => {
     return () => {
       authListener.subscription.unsubscribe()
     }
-  }, [])
+  }, [supabaseClient.auth])
 
   return {
     authUser,
