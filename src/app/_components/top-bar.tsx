@@ -49,9 +49,10 @@ export const TopBar = () => {
                 Login
               </Button>
             )}
-            <Button variant="secondary" onClick={() => setCreateAdminModalOpen(true)}>
+            {/* TODO: Allow users to create admin users */}
+            {/* <Button variant="secondary" onClick={() => setCreateAdminModalOpen(true)}>
               <Plus /> Nuevo Admin
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
