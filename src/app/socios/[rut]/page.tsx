@@ -53,7 +53,7 @@ const Page = () => {
             <h1 className="text-3xl font-bold">Sociono no encontrado</h1>
             <p>RUT: {rut}</p>
           </div>
-          <div className="flex gap-8">
+          <div className="flex gap-8 items-center flex-col md:flex-row ">
             <Link href="/">
               <Button variant="secondary">
                 <HomeIcon /> Inicio

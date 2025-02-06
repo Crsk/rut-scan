@@ -22,7 +22,7 @@ export const ManagePartners = ({ canManage }: { canManage: boolean }) => {
         {partners.map(partner => {
           return (
             <TableRow key={partner.id}>
-              <TableCell>{partner.name}</TableCell>
+              <TableCell className="w-full">{partner.name}</TableCell>
               <TableCell>{partner.rut}</TableCell>
               {/* {canManage && (
                 <TableCell className="text-right">

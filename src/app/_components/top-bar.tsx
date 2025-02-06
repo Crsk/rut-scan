@@ -33,7 +33,7 @@ export const TopBar = () => {
           </div>
           <div className="flex gap-4 items-center">
             <div className="flex gap-2">
-              {authUser?.email && (
+              {authUser?.email && pathname === '/' && (
                 <>
                   <span>👋</span>
                   <span>{authUser?.email}</span>
