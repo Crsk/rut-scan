@@ -34,7 +34,7 @@ const useManagePartnersController = () => {
 
     setName('')
     setRut('')
-  }, [name, rut])
+  }, [name, rut, addUser])
 
   return { name, setName, rut, setRut, addPartner, setPartners, partners, deleteUser }
 }

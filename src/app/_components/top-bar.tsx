@@ -1,18 +1,18 @@
 'use client'
-import { useCreateAdminModal } from '@/components/app/create-admin/context/create-admin-modal.context'
+/* import { useCreateAdminModal } from '@/components/app/create-admin/context/create-admin-modal.context' */
 import { CreateAdminDialog } from '@/components/app/create-admin/create-admin-dialog'
 import { useLoginModal } from '@/components/app/login/context/login-modal.context'
 import { LoginDialog } from '@/components/app/login/login-dialog'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
-import { HomeIcon, Plus } from 'lucide-react'
+import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 
 export const TopBar = () => {
   const { authUser, logout } = useAuth()
   const { setOpen: setLoginModalOpen } = useLoginModal()
-  const { setOpen: setCreateAdminModalOpen } = useCreateAdminModal()
+  /* const { setOpen: setCreateAdminModalOpen } = useCreateAdminModal() */
   const pathname = usePathname()
   const { rut } = useParams<{ rut: string }>()
 

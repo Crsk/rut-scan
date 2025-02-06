@@ -23,7 +23,7 @@ const Page = () => {
 
     if (partner) push(`/socios/${partner.rut}`)
     else push(`/socios/${rut}`)
-  }, [partner, setScanned])
+  }, [partner, setScanned, push, rut, scanned])
 
   return (
     <div className="pt-20">

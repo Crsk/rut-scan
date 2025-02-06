@@ -7,7 +7,7 @@ import { Eye, HomeIcon, QrCode } from 'lucide-react'
 
 const Page = () => {
   const { rut } = useParams<{ rut: string }>()
-  const { data: partner, isPending } = !!rut ? useUserByRut({ rut }) : { data: null, isPending: null }
+  const { data: partner, isPending } = useUserByRut({ rut })
 
   if (isPending)
     return (

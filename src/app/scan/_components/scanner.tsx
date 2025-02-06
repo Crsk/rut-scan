@@ -26,7 +26,7 @@ export const Scanner = (props: any) => {
     return () => {
       html5QrcodeScanner.clear().catch(error => console.error('Failed to clear html5QrcodeScanner. ', error))
     }
-  }, [])
+  }, [props])
 
   return <div id={qrcodeRegionId} />
 }

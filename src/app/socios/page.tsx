@@ -17,7 +17,7 @@ const Partners = () => {
 
     const _partners: UserProps[] = users.filter(user => user.roles?.includes('PARTNER'))
     setPartners(_partners)
-  }, [users])
+  }, [users, setPartners])
 
   return (
     <div className="flex flex-col px-0 md:px-32 lg:px-64 pt-24">
