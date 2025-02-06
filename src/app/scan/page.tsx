@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 
 const Page = () => {
   const [rut, setRut] = useState<string>('')
-  const { data: partner } = !!rut ? useUserByRut({ rut }) : { data: null }
+  const { data: partner } = useUserByRut({ rut })
   const { push } = useRouter()
   const [scanned, setScanned] = useState<boolean>(false)
 
