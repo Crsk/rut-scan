@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { useManagePartners } from '@/app/socios/_components/partners/partners.context'
 
-export const ManagePartners = () => {
+export const ManagePartners = ({ canManage }: { canManage: boolean }) => {
   const { partners, deleteUser } = useManagePartners()
 
   return (
@@ -14,8 +14,8 @@ export const ManagePartners = () => {
         <TableRow>
           <TableHead>Nombre</TableHead>
           <TableHead className="w-[200px]">RUT</TableHead>
-          <TableHead className="text-right w-[100px]">Activo</TableHead>
-          <TableHead className="text-right w-[100px]">Borrar</TableHead>
+          {canManage && <TableHead className="text-right w-[100px]">Activo</TableHead>}
+          {canManage && <TableHead className="text-right w-[100px]">Borrar</TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -24,18 +24,22 @@ export const ManagePartners = () => {
             <TableRow key={partner.id}>
               <TableCell>{partner.name}</TableCell>
               <TableCell>{partner.rut}</TableCell>
-              <TableCell className="text-right">
-                <Switch />
-              </TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  className="text-red-600 hover:bg-red-500 hover:text-red-50"
-                  onClick={() => deleteUser({ id: partner.id })}
-                >
-                  <Trash />
-                </Button>
-              </TableCell>
+              {canManage && (
+                <TableCell className="text-right">
+                  <Switch />
+                </TableCell>
+              )}
+              {canManage && (
+                <TableCell className="text-right">
+                  <Button
+                    variant="ghost"
+                    className="text-red-600 hover:bg-red-500 hover:text-red-50"
+                    onClick={() => deleteUser({ id: partner.id })}
+                  >
+                    <Trash />
+                  </Button>
+                </TableCell>
+              )}
             </TableRow>
           )
         })}

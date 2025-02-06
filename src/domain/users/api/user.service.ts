@@ -21,6 +21,13 @@ export class UserService implements IUserService {
     return objectToCamel(snakeUser)
   }
 
+  async getById({ id }: { id: string }): Promise<UserProps | null> {
+    const snakeUser = await this.repository.getById({ id })
+    if (!snakeUser) return null
+
+    return objectToCamel(snakeUser)
+  }
+
   async getAll(): Promise<UserProps[]> {
     return objectToCamel(await this.repository.getAll())
   }

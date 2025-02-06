@@ -16,6 +16,12 @@ export class UserRepository implements IUserRepository {
     return user || null
   }
 
+  async getById({ id }: { id: string }) {
+    const user = (await this.client.from('users').select('*').eq('id', id).single()).data as UserProps
+
+    return user || null
+  }
+
   async getAll(): Promise<UserProps[]> {
     return (await this.client.from('users').select('*')).data as UserProps[]
   }
