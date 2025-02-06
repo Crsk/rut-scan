@@ -11,7 +11,9 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center justify-center">
         <h1 className="text-3xl">Control de Acceso</h1>
         <div className="flex gap-4">
-          <Button size="lg">Validar Acceso</Button>
+          <Link href="/scan">
+            <Button size="lg">Validar QR</Button>
+          </Link>
 
           {authUser?.email && (
             <Button size="lg" variant="secondary">
