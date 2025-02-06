@@ -54,6 +54,11 @@ const Page = () => {
             <p>RUT: {rut}</p>
           </div>
           <div className="flex gap-8">
+            <Link href="/">
+              <Button variant="secondary">
+                <HomeIcon /> Inicio
+              </Button>
+            </Link>
             <Link href="/socios">
               <Button variant="secondary">
                 <Eye /> Lista de socios

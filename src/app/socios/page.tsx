@@ -18,7 +18,7 @@ const Partners = () => {
   }, [users])
 
   return (
-    <div className="flex flex-col px-0 md:px-32 lg:px-64 pt-12">
+    <div className="flex flex-col px-0 md:px-32 lg:px-64 pt-24">
       <h1 className="pb-4">Socios</h1>
       <ManagePartners />
       <div className="pt-16 pb-64">

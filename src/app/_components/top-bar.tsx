@@ -20,7 +20,7 @@ export const TopBar = () => {
     <>
       <LoginDialog />
       <CreateAdminDialog />
-      <div className="w-screen py-4 px-8 bg-white z-10" style={{ display: rut ? 'none' : 'block' }}>
+      <div className="fixed w-screen py-4 px-8 bg-white z-10" style={{ display: rut ? 'none' : 'block' }}>
         <div className="flex justify-between">
           <div className="flex items-center">
             {pathname !== '/' && (
