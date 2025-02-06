@@ -7,19 +7,20 @@ import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
 import { HomeIcon, Plus } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 
 export const TopBar = () => {
   const { authUser, logout } = useAuth()
   const { setOpen: setLoginModalOpen } = useLoginModal()
   const { setOpen: setCreateAdminModalOpen } = useCreateAdminModal()
   const pathname = usePathname()
+  const { rut } = useParams<{ rut: string }>()
 
   return (
     <>
       <LoginDialog />
       <CreateAdminDialog />
-      <div className="fixed w-screen py-6 px-8 bg-white z-10">
+      <div className="w-screen py-4 px-8 bg-white z-10" style={{ display: rut ? 'none' : 'block' }}>
         <div className="flex justify-between">
           <div className="flex items-center">
             {pathname !== '/' && (
