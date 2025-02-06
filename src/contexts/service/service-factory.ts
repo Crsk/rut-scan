@@ -1,5 +1,5 @@
-import { UserService } from '@/features/users/api/user.service'
-import { UserRepository } from '@/features/users/api/user.repository'
+import { UserService } from '@/domain/users/api/user.service'
+import { UserRepository } from '@/domain/users/api/user.repository'
 import { SupabaseClient } from '@supabase/supabase-js'
 
 export class ServiceLocator {

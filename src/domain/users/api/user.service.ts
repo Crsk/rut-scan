@@ -1,5 +1,5 @@
 import { generateId } from '@/utils/generate-id'
-import { createUser } from '@/features/users/utils/create-user'
+import { createUser } from '@/domain/users/utils/create-user'
 import { UserProps } from '@/core/domain/user/user-props.interface'
 import { UserRepository, UserService as IUserService } from '@/core/adapters/user-repository.interface'
 import { objectToCamel, objectToSnake } from 'ts-case-convert'
@@ -14,6 +14,20 @@ export class UserService implements IUserService {
     return objectToCamel(snakeUser)
   }
 
+  async getByRut({ rut }: { rut: string }): Promise<UserProps | null> {
+    const snakeUser = await this.repository.getByRut({ rut })
+    if (!snakeUser) return null
+
+    return objectToCamel(snakeUser)
+  }
+
+  async getById({ id }: { id: string }): Promise<UserProps | null> {
+    const snakeUser = await this.repository.getById({ id })
+    if (!snakeUser) return null
+
+    return objectToCamel(snakeUser)
+  }
+
   async getAll(): Promise<UserProps[]> {
     return objectToCamel(await this.repository.getAll())
   }
@@ -23,12 +37,14 @@ export class UserService implements IUserService {
     const user = createUser({ id, ...json })
     const snakeUser = objectToSnake(user)
 
-    this.repository.add({ json: snakeUser })
+    await this.repository.add({ json: snakeUser })
   }
 
   async update({ id, updated }: { id: string; updated: Partial<UserProps> }) {
-    this.repository.update({ id, updated: objectToSnake(updated) })
+    await this.repository.update({ id, updated: objectToSnake(updated) })
   }
 
-  async delete() {}
+  async delete({ id }: { id: string }) {
+    await this.repository.delete({ id })
+  }
 }

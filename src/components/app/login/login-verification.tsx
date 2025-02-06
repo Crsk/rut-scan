@@ -4,7 +4,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
 import { useLoginModal } from '@/components/app/login/context/login-modal.context'
-import { useAddUser } from '@/features/users/hooks/use-add-user'
+import { useAddUser } from '@/domain/users/hooks/use-add-user'
 
 export const LoginVerification = () => {
   const { setStep, verify, setErrorMessage } = useLoginModal()

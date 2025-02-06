@@ -4,21 +4,13 @@ import { useLoginModal } from './context/login-modal.context'
 import { Button } from '@/components/ui/button'
 import { Send } from 'lucide-react'
 import { useCallback } from 'react'
-import { useDataService } from '@/contexts/service/data.context'
 
 export const LoginEmail = () => {
-  const { email, setEmail, sendCode, setErrorMessage } = useLoginModal()
-  const { userService } = useDataService()
+  const { email, setEmail, sendCode } = useLoginModal()
 
   const handleSubmit = useCallback(async () => {
-    const user = await userService.get({ email })
-
     setEmail(email)
     sendCode()
-    /* if (user?.isAdmin) {
-    } else {
-      setErrorMessage('Email no autorizado')
-    } */
   }, [email])
 
   return (
