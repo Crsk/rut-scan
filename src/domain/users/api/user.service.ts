@@ -1,5 +1,5 @@
 import { generateId } from '@/utils/generate-id'
-import { createUser } from '@/features/users/utils/create-user'
+import { createUser } from '@/domain/users/utils/create-user'
 import { UserProps } from '@/core/domain/user/user-props.interface'
 import { UserRepository, UserService as IUserService } from '@/core/adapters/user-repository.interface'
 import { objectToCamel, objectToSnake } from 'ts-case-convert'

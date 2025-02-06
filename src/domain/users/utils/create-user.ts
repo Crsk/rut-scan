@@ -7,5 +7,7 @@ export const createUser = (overrides?: Partial<UserProps>): UserProps => ({
   position: '',
   rut: '',
   name: '',
+  isAdmin: false,
+  isSuperAdmin: false,
   ...overrides
 })

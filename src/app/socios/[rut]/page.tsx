@@ -1,6 +1,6 @@
 'use client'
 import { useParams } from 'next/navigation'
-import { useUserByRut } from '@/features/users/hooks/use-user-by-rut'
+import { useUserByRut } from '@/domain/users/hooks/use-user-by-rut'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Eye, HomeIcon, QrCode } from 'lucide-react'

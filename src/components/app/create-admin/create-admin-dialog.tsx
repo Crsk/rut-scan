@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Send } from 'lucide-react'
 import { useCreateAdminModal } from '@/components/app/create-admin/context/create-admin-modal.context'
-import { useAddUser } from '@/features/users/hooks/use-add-user'
+import { useAddUser } from '@/domain/users/hooks/use-add-user'
 
 export const CreateAdminDialog = () => {
   const { open, setOpen } = useCreateAdminModal()

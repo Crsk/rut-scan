@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import { UserProps } from '@/core/domain/user/user-props.interface'
-import { useUsers } from '@/features/users/hooks/use-users'
+import { useUsers } from '@/domain/users/hooks/use-users'
 import { NewPartner } from '@/app/socios/_components/partners/new-parter'
 import { ManagePartners } from '@/app/socios/_components/partners/manage-partners'
 import { ManagePartnersProvider, useManagePartners } from '@/app/socios/_components/partners/partners.context'

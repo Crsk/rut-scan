@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Scanner } from './_components/scanner'
 import { getRunFromUrl } from './_utils/get-run-from-url'
-import { useUserByRut } from '@/features/users/hooks/use-user-by-rut'
+import { useUserByRut } from '@/domain/users/hooks/use-user-by-rut'
 import { useRouter } from 'next/navigation'
 
 const Page = () => {

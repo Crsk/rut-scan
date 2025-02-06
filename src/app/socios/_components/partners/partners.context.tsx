@@ -2,8 +2,8 @@
 import { Dispatch, useCallback, useState } from 'react'
 import { createContext } from '@/contexts/create-context'
 import { UserProps } from '@/core/domain/user/user-props.interface'
-import { useAddUser } from '@/features/users/hooks/use-add-user'
-import { useDeleteUser } from '@/features/users/hooks/use-delete-user'
+import { useAddUser } from '@/domain/users/hooks/use-add-user'
+import { useDeleteUser } from '@/domain/users/hooks/use-delete-user'
 
 export type UseManagePartners = {
   name: string
