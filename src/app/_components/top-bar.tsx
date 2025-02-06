@@ -46,7 +46,7 @@ export const TopBar = () => {
               </Button>
             ) : (
               <Button variant="outline" onClick={() => setLoginModalOpen(true)}>
-                Login
+                Admin
               </Button>
             )}
             {/* TODO: Allow users to create admin users */}
