@@ -25,8 +25,7 @@ const Page = () => {
           <div className="flex flex-col items-center gap-4">
             <h1 className="text-3xl font-bold">{partner.name}</h1>
             <div className="flex flex-col items-center">
-              <p>Socio encontrado</p>
-              <p>{partner.rut}</p>
+              <p>✅ Socio encontrado</p>
             </div>
           </div>
           <div className="flex gap-4">

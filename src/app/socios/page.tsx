@@ -23,9 +23,10 @@ const Partners = () => {
     <div className="flex flex-col px-6 md:px-32 lg:px-64 pt-24">
       <h1 className="pb-4">Socios</h1>
       <ManagePartners canManage={canManage} />
+      <div className="w-full bg-zinc-200 h-[1px] mt-32"></div>
       {canManage && (
-        <div className="pt-16 pb-64">
-          <h2>Nuevo Socio</h2>
+        <div className="pb-64 pt-3">
+          <h2 className="flex justify-end pb-8 text-zinc-400">Crear Socio</h2>
           <NewPartner />
         </div>
       )}
