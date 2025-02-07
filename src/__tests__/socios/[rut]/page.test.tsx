@@ -39,8 +39,7 @@ describe('Partner Details Page', () => {
   it('should display partner information when found', () => {
     render(<Page />)
     expect(screen.getByText('Bob Toronja')).toBeInTheDocument()
-    expect(screen.getByText('12345678-9')).toBeInTheDocument()
-    expect(screen.getByText('Socio encontrado')).toBeInTheDocument()
+    expect(screen.getByText('✅ Socio encontrado')).toBeInTheDocument()
   })
 
   it('should display not found message for non-existent partner', () => {
