@@ -8,5 +8,6 @@ export const createUser = (overrides?: Partial<UserProps>): UserProps => ({
   rut: '',
   name: '',
   roles: ['PARTNER'],
+  imageUrl: null,
   ...overrides
 })

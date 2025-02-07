@@ -5,6 +5,7 @@ import { LoginModalProvider } from '@/components/app/login/context/login-modal.c
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { CreateAdminModalProvider } from '@/components/app/create-admin/context/create-admin-modal.context'
 import { ReactNode } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 export const ClientProviders = ({ children }: { children: ReactNode }) => {
   const queryClient = new QueryClient()
@@ -13,7 +14,10 @@ export const ClientProviders = ({ children }: { children: ReactNode }) => {
       <DataServiceProvider>
         <QueryClientProvider client={queryClient}>
           <LoginModalProvider>
-            <CreateAdminModalProvider>{children}</CreateAdminModalProvider>
+            <CreateAdminModalProvider>
+              <Toaster />
+              {children}
+            </CreateAdminModalProvider>
           </LoginModalProvider>
         </QueryClientProvider>
       </DataServiceProvider>
