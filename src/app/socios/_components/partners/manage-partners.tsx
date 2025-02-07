@@ -12,6 +12,7 @@ export const ManagePartners = ({ canManage }: { canManage: boolean }) => {
       {/* <TableCaption>Última Actualización: 5 Febrero 2025</TableCaption> */}
       <TableHeader>
         <TableRow>
+          <TableHead>Foto</TableHead>
           <TableHead>Nombre</TableHead>
           <TableHead className="w-[200px]">RUT</TableHead>
           {/* {canManage && <TableHead className="text-right w-[100px]">Activo</TableHead>} */}
@@ -22,6 +23,11 @@ export const ManagePartners = ({ canManage }: { canManage: boolean }) => {
         {partners.map(partner => {
           return (
             <TableRow key={partner.id}>
+              <TableCell>
+                <a target="_blank" href={partner.imageUrl || undefined}>
+                  <img src={partner.imageUrl || undefined} alt={partner.name} />
+                </a>
+              </TableCell>
               <TableCell className="w-full">{partner.name}</TableCell>
               <TableCell>{partner.rut}</TableCell>
               {/* {canManage && (

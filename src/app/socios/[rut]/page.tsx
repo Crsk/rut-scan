@@ -23,6 +23,7 @@ const Page = () => {
       <div className="fixed overflow-hidden w-screen h-screen bg-emerald-700 text-emerald-100 pb-20 transition-all duration-500">
         <div className="flex flex-col h-full justify-center items-center gap-16">
           <div className="flex flex-col items-center gap-4">
+            <img src={partner.imageUrl || undefined} alt={partner.name} className="w-24 h-24 rounded-full" />
             <h1 className="text-3xl font-bold">{partner.name}</h1>
             <div className="flex flex-col items-center">
               <p>✅ Socio encontrado</p>
