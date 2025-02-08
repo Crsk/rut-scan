@@ -157,7 +157,7 @@ const QRScanner: FC<QRScannerProps> = ({ onScan }) => {
 
   return (
     <div className="flex flex-col items-center max-w-md mx-auto">
-      <div>
+      <div className="relative w-full aspect-square bg-black overflow-hidden">
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
@@ -165,7 +165,6 @@ const QRScanner: FC<QRScannerProps> = ({ onScan }) => {
           playsInline
           onPlay={() => setScanning(true)}
         />
-
         {/* Scanning Overlay */}
         {scanning && (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -183,7 +182,6 @@ const QRScanner: FC<QRScannerProps> = ({ onScan }) => {
             </div>
           </div>
         )}
-
         {/* Permission/Error States */}
         {!scanning && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
