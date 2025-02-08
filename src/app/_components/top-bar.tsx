@@ -18,44 +18,48 @@ export const TopBar = () => {
 
   return (
     <>
-      <LoginDialog />
-      <CreateAdminDialog />
-      <div className="fixed w-screen py-4 px-8 bg-white z-10" style={{ display: rut ? 'none' : 'block' }}>
-        <div className="flex justify-between">
-          <div className="flex items-center">
-            {pathname !== '/' && (
-              <Link href="/">
-                <Button variant="ghost">
-                  <HomeIcon /> Inicio
-                </Button>
-              </Link>
-            )}
-          </div>
-          <div className="flex gap-4 items-center">
-            <div className="flex gap-2">
-              {authUser?.email && pathname === '/' && (
-                <>
-                  <span>👋</span>
-                  <span>{authUser?.email}</span>
-                </>
-              )}
-            </div>
-            {authUser?.email ? (
-              <Button variant="secondary" onClick={logout}>
-                Logout
-              </Button>
-            ) : (
-              <Button variant="outline" onClick={() => setLoginModalOpen(true)}>
-                Admin
-              </Button>
-            )}
-            {/* TODO: Allow users to create admin users */}
-            {/* <Button variant="secondary" onClick={() => setCreateAdminModalOpen(true)}>
+      {pathname !== '/face-recognition' && (
+        <>
+          <LoginDialog />
+          <CreateAdminDialog />
+          <div className="fixed w-screen py-4 px-8 bg-white z-10" style={{ display: rut ? 'none' : 'block' }}>
+            <div className="flex justify-between">
+              <div className="flex items-center">
+                {pathname !== '/' && (
+                  <Link href="/">
+                    <Button variant="ghost">
+                      <HomeIcon /> Inicio
+                    </Button>
+                  </Link>
+                )}
+              </div>
+              <div className="flex gap-4 items-center">
+                <div className="flex gap-2">
+                  {authUser?.email && pathname === '/' && (
+                    <>
+                      <span>👋</span>
+                      <span>{authUser?.email}</span>
+                    </>
+                  )}
+                </div>
+                {authUser?.email ? (
+                  <Button variant="secondary" onClick={logout}>
+                    Logout
+                  </Button>
+                ) : (
+                  <Button variant="outline" onClick={() => setLoginModalOpen(true)}>
+                    Admin
+                  </Button>
+                )}
+                {/* TODO: Allow users to create admin users */}
+                {/* <Button variant="secondary" onClick={() => setCreateAdminModalOpen(true)}>
               <Plus /> Nuevo Admin
             </Button> */}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   )
 }

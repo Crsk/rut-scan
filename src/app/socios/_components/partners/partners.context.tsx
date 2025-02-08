@@ -68,7 +68,7 @@ const useManagePartnersController = () => {
 
     const supabase = getClient()
     setIsUploading(true)
-    const filePath = `uploads/${Date.now()}_${file.name}`
+    const filePath = `uploads/${Date.now()}`
     const { error } = await supabase.storage.from('nextsupabase').upload(filePath, file)
     if (error) console.error('Upload error:', error.message)
 

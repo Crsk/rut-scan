@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { QrCode, UsersIcon } from 'lucide-react'
+import { QrCode, ScanFaceIcon, UsersIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Home() {
@@ -8,7 +8,13 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)] pb-36">
       <main className="flex flex-col gap-8 row-start-2 items-center justify-center">
         <h1 className="text-3xl pb-16">Control de Acceso</h1>
-        <div className="flex gap-4">
+        <div className="flex flex-col gap-4 md:flex-row items-center">
+          <Link href="/face-recognition">
+            <Button size="lg">
+              <ScanFaceIcon /> Reconocimiento Facial
+            </Button>
+          </Link>
+
           <Link href="/scan">
             <Button size="lg">
               <QrCode /> Validar QR
