@@ -11,12 +11,12 @@ export default {
     extend: {
       keyframes: {
         scan: {
-          '0%': { transform: 'translateY(6)' },
-          '100%': { transform: 'translateY(250px)' }
+          '0%': { transform: 'translateY(8)' },
+          '100%': { transform: 'translateY(70px)' }
         }
       },
       animation: {
-        scan: 'scan 2s linear infinite'
+        scan: 'scan 1s linear infinite'
       },
 
       colors: {

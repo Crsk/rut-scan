@@ -169,12 +169,12 @@ const QRScanner: FC<QRScannerProps> = ({ onScan }) => {
         {/* Scanning Overlay */}
         {scanning && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative w-64 h-64">
+            <div className="relative w-20 h-20">
               {/* Scanner corners */}
-              <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-white rounded-tl-xl" />
-              <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-white rounded-tr-xl" />
-              <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-white rounded-bl-xl" />
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-white rounded-br-xl" />
+              <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-white rounded-tl-xl" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-white rounded-tr-xl" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-white rounded-bl-xl" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-white rounded-br-xl" />
 
               {/* Scanning line animation */}
               <div className="absolute top-0 left-0 w-full animate-scan">
