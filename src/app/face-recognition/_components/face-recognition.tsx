@@ -30,9 +30,6 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isModelLoaded, setIsModelLoaded] = useState<boolean>(false)
-  /* const [detectedFace, setDetectedFace] = useState<WithFaceDescriptor<
-    WithFaceLandmarks<{ detection: FaceDetection }, FaceLandmarks68>
-  > | null>(null) */
   const { matchResult, setMatchResult } = useFaceRecognition()
 
   useEffect(() => {
@@ -80,11 +77,11 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
         .withFaceLandmarks()
         .withFaceDescriptor()
 
-      if (detection) {
+      if (detection && image.metadata) {
         referenceDescriptors.push({
           descriptor: detection.descriptor,
           label: image.label,
-          metadata: { entity: image.metadata?.user! }
+          metadata: { entity: image.metadata.user }
         })
       }
     }
