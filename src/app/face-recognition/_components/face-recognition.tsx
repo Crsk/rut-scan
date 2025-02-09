@@ -166,17 +166,21 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
   }, [isModelLoaded, referenceDescriptors, detectFaces])
 
   return (
-    <div className="relative h-auto w-[100vw]">
+    <div className="relative">
       <video
         ref={videoRef}
         autoPlay
         muted
         playsInline
         onPlay={detectFaces}
-        className="h-auto w-[100vw]"
-        style={{ objectFit: 'cover' }}
+        className="w-full h-full object-cover"
+        style={{ aspectRatio: '1/1' }}
       />
-      <canvas ref={canvasRef} className="absolute top-0 left-0 h-auto w-[100vw]" />
+      <canvas
+        ref={canvasRef}
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        style={{ aspectRatio: '1/1' }}
+      />
 
       <div className="absolute">
         {!isModelLoaded && (
