@@ -30,7 +30,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isModelLoaded, setIsModelLoaded] = useState<boolean>(false)
-  const { matchResult, setMatchResult, setLastMatch } = useFaceRecognition()
+  const { setMatchResult, setLastMatch } = useFaceRecognition()
   const intervalRef = useRef<NodeJS.Timeout>(null)
   const [referenceDescriptors, setReferenceDescriptors] = useState<
     Array<{
@@ -166,7 +166,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
   }, [isModelLoaded, referenceDescriptors, detectFaces])
 
   return (
-    <div className="relative">
+    <div className="relative aspect-square">
       <video
         ref={videoRef}
         autoPlay
@@ -178,12 +178,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
       />
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full" />
 
-      <div className="">
-        {matchResult && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white">
-            <p>✅ {matchResult.metadata.entity.rut}</p>
-          </div>
-        )}
+      <div className="absolute">
         {!isModelLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white">
             Cargando...
