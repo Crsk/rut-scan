@@ -166,17 +166,17 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
   }, [isModelLoaded, referenceDescriptors, detectFaces])
 
   return (
-    <div className="relative h-[80vw] w-[100vw]">
+    <div className="relative h-[100vw] w-[100vw]">
       <video
         ref={videoRef}
         autoPlay
         muted
         playsInline
         onPlay={detectFaces}
-        className="h-[80vw] w-[100vw]"
+        className="h-[100vw] w-[100vw]"
         style={{ objectFit: 'cover' }}
       />
-      <canvas ref={canvasRef} className="absolute top-0 left-0 h-[80vw] w-[100vw]" />
+      <canvas ref={canvasRef} className="absolute top-0 left-0 h-[100vw] w-[100vw]" />
 
       <div className="absolute">
         {!isModelLoaded && (
