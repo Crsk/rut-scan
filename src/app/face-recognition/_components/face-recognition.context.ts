@@ -1,7 +1,7 @@
 'use client'
 import { createContext } from '@/contexts/create-context'
 import { UserProps } from '@/core/domain/user/user-props.interface'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 export type MatchResult<T = UserProps> = {
   label: string
@@ -20,7 +20,10 @@ export type UseFaceRecognition = {
 const useFaceRecognitionController = () => {
   const [matchResult, setMatchResult] = useState<MatchResult | null>(null)
   const [lastMatch, setLastMatch] = useState<MatchResult | null>(null)
-  const reset = () => void setMatchResult(null)
+  const reset = useCallback(() => {
+    setMatchResult(null)
+    setLastMatch(null)
+  }, [setMatchResult, setLastMatch])
 
   return {
     matchResult,
