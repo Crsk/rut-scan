@@ -25,7 +25,7 @@ export const ManagePartners = ({ canManage }: { canManage: boolean }) => {
             <TableRow key={partner.id}>
               <TableCell>
                 <a target="_blank" href={partner.imageUrl || undefined}>
-                  <img src={partner.imageUrl || undefined} alt={partner.name} />
+                  {!partner.imageUrl ? '' : <img src={partner.imageUrl} alt={partner.name} />}
                 </a>
               </TableCell>
               <TableCell className="w-full">{partner.name}</TableCell>
