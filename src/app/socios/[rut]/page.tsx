@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation'
 import { useUserByRut } from '@/domain/users/hooks/use-user-by-rut'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Eye, HomeIcon, QrCode } from 'lucide-react'
+import { HomeIcon, QrCode } from 'lucide-react'
 
 const Page = () => {
   const { rut } = useParams<{ rut: string }>()
@@ -57,11 +57,6 @@ const Page = () => {
             <Link href="/">
               <Button variant="secondary">
                 <HomeIcon /> Inicio
-              </Button>
-            </Link>
-            <Link href="/socios">
-              <Button variant="secondary">
-                <Eye /> Lista de socios
               </Button>
             </Link>
 

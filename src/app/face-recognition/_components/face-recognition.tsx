@@ -153,15 +153,15 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
         muted
         playsInline
         onPlay={detectFaces}
-        className="w-full h-auto"
+        className="w-full"
         style={{ objectFit: 'cover' }}
       />
-      <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
+      <canvas ref={canvasRef} className="absolute top-0 left-0 w-full" />
 
       <div className="">
         {matchResult && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white">
-            <p>✅ Socio</p>
+            <p>✅ {matchResult.metadata.entity.rut}</p>
           </div>
         )}
         {!isModelLoaded && (
