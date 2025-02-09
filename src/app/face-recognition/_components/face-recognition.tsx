@@ -143,11 +143,10 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
 
   useEffect(() => {
     loadModels()
+    const stream = videoRef.current?.srcObject as MediaStream
+
     return () => {
-      if (videoRef.current?.srcObject) {
-        const stream = videoRef.current.srcObject as MediaStream
-        stream.getTracks().forEach(track => track.stop())
-      }
+      if (stream) stream.getTracks().forEach(track => track.stop())
     }
   }, [loadModels])
 
