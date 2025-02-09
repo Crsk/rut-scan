@@ -22,13 +22,26 @@ const QRScanner: FC<QRScannerProps> = ({ onScan }) => {
   const startCamera = useCallback(async () => {
     try {
       let stream: MediaStream | null = null
-      const constraints: MediaStreamConstraints = { video: { facingMode: 'environment' } }
+      const constraints: MediaStreamConstraints = {
+        video: {
+          facingMode: 'environment',
+          width: 1280,
+          height: 720,
+          frameRate: 30
+        }
+      }
 
       try {
         stream = await navigator.mediaDevices.getUserMedia(constraints)
       } catch (err) {
         console.log('Failed to get environment camera, trying default...', { err })
-        stream = await navigator.mediaDevices.getUserMedia({ video: true })
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            frameRate: { ideal: 30 }
+          }
+        })
       }
 
       if (videoRef.current && stream) {
