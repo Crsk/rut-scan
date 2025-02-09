@@ -16,7 +16,7 @@ const Page = () => {
         ?.map(user => ({ url: user.imageUrl!, label: user.name!, metadata: { user } }) as ReferenceImage),
     [users]
   )
-  const { matchResult, reset } = useFaceRecognition()
+  const { lastMatch, reset } = useFaceRecognition()
 
   if (!referenceImages) return <>Cargando...</>
 
@@ -28,19 +28,19 @@ const Page = () => {
       <div
         className="h-screen flex flex-col items-center justify-center"
         style={{
-          backgroundColor: matchResult ? 'oklch(50.8% 0.1447 165.612)' : 'oklch(50.5% 0.2317 27.518)',
-          color: matchResult ? 'oklch(0.95 0.052 163.051)' : 'oklch(0.936 0.032 17.717)'
+          backgroundColor: lastMatch ? 'oklch(50.8% 0.1447 165.612)' : 'oklch(50.5% 0.2317 27.518)',
+          color: lastMatch ? 'oklch(0.95 0.052 163.051)' : 'oklch(0.936 0.032 17.717)'
         }}
       >
         <div className="flex flex-col items-center justify-center pt-64">
-          {matchResult ? (
+          {lastMatch ? (
             <div className="flex flex-col items-center justify-center gap-4 h-48">
               <img
-                src={matchResult.metadata.entity.imageUrl || undefined}
-                alt={matchResult.metadata.entity.name}
+                src={lastMatch.metadata.entity.imageUrl || undefined}
+                alt={lastMatch.metadata.entity.name}
                 className="w-24 h-24 rounded-full"
               />
-              <h1 className="text-3xl font-bold">{matchResult.metadata.entity.name}</h1>
+              <h1 className="text-3xl font-bold">{lastMatch.metadata.entity.name}</h1>
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center gap-4 h-48">

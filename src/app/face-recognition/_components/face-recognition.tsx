@@ -30,7 +30,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isModelLoaded, setIsModelLoaded] = useState<boolean>(false)
-  const { matchResult, setMatchResult } = useFaceRecognition()
+  const { matchResult, setMatchResult, setLastMatch } = useFaceRecognition()
 
   useEffect(() => {
     const loadModels = async (): Promise<void> => {
@@ -131,6 +131,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
               metadata: refFace.metadata
             }
             setMatchResult(bestMatch)
+            setLastMatch(bestMatch)
           }
         }
 
@@ -139,7 +140,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
         draw.drawFaceLandmarks(canvas, resizedDetections)
       } else {
         /* setDetectedFace(null) */
-        /* setMatchResult(null) */
+        setMatchResult(null)
       }
     }, 100)
   }

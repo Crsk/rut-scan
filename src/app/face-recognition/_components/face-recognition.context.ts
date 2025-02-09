@@ -12,17 +12,22 @@ export type MatchResult<T = UserProps> = {
 export type UseFaceRecognition = {
   matchResult: MatchResult | null
   setMatchResult: (result: MatchResult | null) => void
+  lastMatch: MatchResult | null
+  setLastMatch: (result: MatchResult | null) => void
   reset: () => void
 }
 
 const useFaceRecognitionController = () => {
   const [matchResult, setMatchResult] = useState<MatchResult | null>(null)
+  const [lastMatch, setLastMatch] = useState<MatchResult | null>(null)
   const reset = () => void setMatchResult(null)
 
   return {
     matchResult,
     setMatchResult,
-    reset
+    reset,
+    lastMatch,
+    setLastMatch
   }
 }
 
