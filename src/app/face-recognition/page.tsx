@@ -22,17 +22,15 @@ const Page = () => {
 
   return (
     <>
-      <div className="absolute">
-        <FaceRecognition referenceImages={referenceImages} />
-      </div>
       <div
-        className="h-screen flex flex-col items-center justify-center"
+        className="h-screen flex flex-col"
         style={{
           backgroundColor: lastMatch ? 'oklch(50.8% 0.1447 165.612)' : 'black',
           color: lastMatch ? 'oklch(0.95 0.052 163.051)' : 'white'
         }}
       >
-        <div className="flex flex-col items-center justify-center pt-64">
+        <FaceRecognition referenceImages={referenceImages} />
+        <div className="flex flex-col items-center justify-center pt-16">
           {lastMatch ? (
             <div className="flex flex-col items-center justify-center gap-4 h-32">
               <img
@@ -48,7 +46,7 @@ const Page = () => {
             </div>
           )}
 
-          <div className="flex gap-4 items-center flex-col md:flex-row pt-8">
+          <div className="flex gap-4 items-center md:flex-row pt-8">
             <Button onClick={reset} variant="secondary">
               <ScanFaceIcon />
               Reset
