@@ -12,6 +12,8 @@ const Page = () => {
   const [scanned, setScanned] = useState<boolean>(false)
 
   const onNewScanResult = useCallback((decodedText: string) => {
+    if (!decodedText) return
+
     const RUN = getRunFromUrl(decodedText)
     if (RUN) setRut(RUN)
 
@@ -27,7 +29,7 @@ const Page = () => {
 
   return (
     <div className="pt-20">
-      <QRScanner onScan={result => result && onNewScanResult(result)} />
+      <QRScanner onScan={result => onNewScanResult(result)} />
     </div>
   )
 }
