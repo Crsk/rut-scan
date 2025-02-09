@@ -10,7 +10,7 @@ type DetectionProps = {
   referenceImages: ReferenceImage[]
 }
 
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import {
   nets,
   fetchImage,
@@ -31,29 +31,29 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isModelLoaded, setIsModelLoaded] = useState<boolean>(false)
   const { matchResult, setMatchResult, setLastMatch } = useFaceRecognition()
+  const intervalRef = useRef<NodeJS.Timeout>(null)
+  const [referenceDescriptors, setReferenceDescriptors] = useState<
+    Array<{
+      descriptor: Float32Array
+      label: string
+      metadata: { entity: UserProps }
+    }>
+  >([])
 
-  useEffect(() => {
-    const loadModels = async (): Promise<void> => {
-      try {
-        await Promise.all([
-          nets.tinyFaceDetector.loadFromUri('/models'),
-          nets.faceLandmark68Net.loadFromUri('/models'),
-          nets.faceRecognitionNet.loadFromUri('/models')
-        ])
-        setIsModelLoaded(true)
-      } catch (error) {
-        console.error('Error loading models:', error)
-      }
+  const loadModels = useCallback(async (): Promise<void> => {
+    try {
+      await Promise.all([
+        nets.tinyFaceDetector.loadFromUri('/models'),
+        nets.faceLandmark68Net.loadFromUri('/models'),
+        nets.faceRecognitionNet.loadFromUri('/models')
+      ])
+      setIsModelLoaded(true)
+    } catch (error) {
+      console.error('Error loading models:', error)
     }
-
-    loadModels()
   }, [])
 
-  useEffect(() => {
-    if (isModelLoaded && videoRef.current) startVideo()
-  }, [isModelLoaded])
-
-  const startVideo = async (): Promise<void> => {
+  const startVideo = useCallback(async (): Promise<void> => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true })
       if (videoRef.current) {
@@ -62,10 +62,10 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
     } catch (error) {
       console.error('Error accessing webcam:', error)
     }
-  }
+  }, [])
 
-  const processReferenceImages = async () => {
-    const referenceDescriptors: Array<{
+  const processReferenceImages = useCallback(async () => {
+    const descriptors: Array<{
       descriptor: Float32Array
       label: string
       metadata: { entity: UserProps }
@@ -78,7 +78,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
         .withFaceDescriptor()
 
       if (detection && image.metadata) {
-        referenceDescriptors.push({
+        descriptors.push({
           descriptor: detection.descriptor,
           label: image.label,
           metadata: { entity: image.metadata.user }
@@ -86,64 +86,85 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
       }
     }
 
-    return referenceDescriptors
-  }
+    setReferenceDescriptors(descriptors)
+  }, [referenceImages])
 
-  const detectFaces = async (): Promise<void> => {
-    if (!videoRef.current || !canvasRef.current) return
-
-    const referenceDescriptors = await processReferenceImages()
+  const detectFaces = useCallback(async (): Promise<void> => {
+    if (!videoRef.current || !canvasRef.current || referenceDescriptors.length === 0) return
 
     const canvas = canvasRef.current
     const displaySize = {
-      width: videoRef.current.videoWidth,
-      height: videoRef.current.videoHeight
+      width: videoRef.current.videoWidth || 400,
+      height: videoRef.current.videoHeight || 400
     }
     matchDimensions(canvas, displaySize)
 
-    setInterval(async () => {
+    const processFaces = async () => {
       const detections = await detectAllFaces(videoRef.current!, new TinyFaceDetectorOptions())
         .withFaceLandmarks()
         .withFaceDescriptors()
 
       const resizedDetections = resizeResults(detections, displaySize)
       const ctx = canvas.getContext('2d')
-      if (ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-      }
+
+      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       if (resizedDetections.length > 0) {
-        /* setDetectedFace(resizedDetections[0]) */
-
-        // Compare with reference images
         const currentFaceDescriptor = resizedDetections[0].descriptor
         let bestMatch: MatchResult | null = null
-        let faceSimilarityTgreashold = 0.6
+        let faceSimilarityThreshold = 0.6
 
         for (const refFace of referenceDescriptors) {
           const distance = euclideanDistance(currentFaceDescriptor, refFace.descriptor)
 
-          if (distance < faceSimilarityTgreashold) {
-            faceSimilarityTgreashold = distance
+          if (distance < faceSimilarityThreshold) {
+            faceSimilarityThreshold = distance
             bestMatch = {
               label: refFace.label,
               distance: distance,
               metadata: refFace.metadata
             }
-            setMatchResult(bestMatch)
-            setLastMatch(bestMatch)
           }
+        }
+
+        if (bestMatch) {
+          setMatchResult(bestMatch)
+          setLastMatch(bestMatch)
         }
 
         // Draw face detections
         draw.drawDetections(canvas, resizedDetections)
         draw.drawFaceLandmarks(canvas, resizedDetections)
-      } else {
-        /* setDetectedFace(null) */
-        setMatchResult(null)
+      } else setMatchResult(null)
+    }
+
+    intervalRef.current = setInterval(processFaces, 100)
+  }, [referenceDescriptors, setMatchResult, setLastMatch])
+
+  useEffect(() => {
+    loadModels()
+    return () => {
+      if (videoRef.current?.srcObject) {
+        const stream = videoRef.current.srcObject as MediaStream
+        stream.getTracks().forEach(track => track.stop())
       }
-    }, 100)
-  }
+    }
+  }, [loadModels])
+
+  useEffect(() => {
+    if (isModelLoaded && videoRef.current) {
+      startVideo()
+      processReferenceImages()
+    }
+  }, [isModelLoaded, startVideo, processReferenceImages])
+
+  useEffect(() => {
+    if (isModelLoaded && referenceDescriptors.length > 0) detectFaces()
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [isModelLoaded, referenceDescriptors, detectFaces])
 
   return (
     <div className="relative">
