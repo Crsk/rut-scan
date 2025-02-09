@@ -147,7 +147,15 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
 
   return (
     <div className="relative">
-      <video ref={videoRef} autoPlay muted onPlay={detectFaces} className="w-full h-auto" />
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        playsInline
+        onPlay={detectFaces}
+        className="w-full h-auto"
+        style={{ objectFit: 'cover' }}
+      />
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
 
       <div className="">
