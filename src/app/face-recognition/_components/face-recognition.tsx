@@ -166,7 +166,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
   }, [isModelLoaded, referenceDescriptors, detectFaces])
 
   return (
-    <div className="relative aspect-square">
+    <div className="relative aspect-square h-[100vw]">
       <video
         ref={videoRef}
         autoPlay
