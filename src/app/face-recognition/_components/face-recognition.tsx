@@ -100,12 +100,15 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
     matchDimensions(canvas, displaySize)
 
     const processFaces = async () => {
-      const detections = await detectAllFaces(videoRef.current!, new TinyFaceDetectorOptions())
+      if (document.hidden) return
+
+      const detectionOptions = new TinyFaceDetectorOptions({ inputSize: 320, scoreThreshold: 0.5 })
+      const detections = await detectAllFaces(videoRef.current!, detectionOptions)
         .withFaceLandmarks()
         .withFaceDescriptors()
 
       const resizedDetections = resizeResults(detections, displaySize)
-      const ctx = canvas.getContext('2d')
+      const ctx = canvas.getContext('2d', { willReadFrequently: true })
 
       if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -138,7 +141,7 @@ export const FaceRecognition: FC<DetectionProps> = ({ referenceImages }) => {
       } else setMatchResult(null)
     }
 
-    intervalRef.current = setInterval(processFaces, 100)
+    intervalRef.current = setInterval(() => void requestAnimationFrame(processFaces), 500)
   }, [referenceDescriptors, setMatchResult, setLastMatch])
 
   useEffect(() => {
