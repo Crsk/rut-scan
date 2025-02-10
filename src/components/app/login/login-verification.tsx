@@ -4,12 +4,12 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth/auth.context'
 import { useLoginModal } from '@/components/app/login/context/login-modal.context'
-import { useAddUser } from '@/domain/users/hooks/use-add-user'
+import { useUpsertUser } from '@/domain/users/hooks/use-upsert-user'
 
 export const LoginVerification = () => {
   const { setStep, verify, setErrorMessage } = useLoginModal()
   const { setAuthUser } = useAuth()
-  const { mutate: addUser } = useAddUser()
+  const { mutate: upsertUser } = useUpsertUser()
 
   return (
     <div className="flex flex-col mt-5">
@@ -19,7 +19,7 @@ export const LoginVerification = () => {
         onChange={async pin => {
           const { success, email, id } = await verify(pin)
           if (success && id) {
-            addUser({ json: { id, email } })
+            upsertUser({ json: { id, email } })
             setAuthUser({ id, email })
           }
         }}

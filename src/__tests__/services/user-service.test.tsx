@@ -25,7 +25,7 @@ describe('UserService', () => {
       const addSpy = vi.spyOn(repository, 'add')
 
       // create a doc without id
-      service.add({ json: { name: 'no-id' } })
+      await service.add({ json: { name: 'no-id' } })
 
       // the repo receives the generated id
       expect(addSpy).toHaveBeenCalledWith({
@@ -45,7 +45,7 @@ describe('UserService', () => {
       ]
 
       // create the first user
-      service.add({ json: sampleUsers[0] })
+      await service.add({ json: sampleUsers[0] })
       expect(repoGetByIdSpy).toHaveBeenCalledWith({ json: objectToSnake(sampleUsers[0]) })
 
       // get users, should be 1
@@ -54,13 +54,36 @@ describe('UserService', () => {
       expect(users).toEqual([sampleUsers[0]])
 
       // create a second user
-      service.add({ json: sampleUsers[1] })
+      await service.add({ json: sampleUsers[1] })
       expect(repoGetByIdSpy).toHaveBeenCalledWith({ json: objectToSnake(sampleUsers[1]) })
 
       // get users, should be 2
       const users2 = await service.getAll()
       expect(users2).toHaveLength(2)
       expect(users2).toEqual(sampleUsers)
+    })
+
+    it('should update user', async () => {
+      const updateSpy = vi.spyOn(repository, 'update')
+      const user = createUser({ id: '1', name: 'Original Name', email: 'test@mail.com' })
+
+      // create initial user
+      await service.add({ json: user })
+      const users = await service.getAll()
+      expect(users).toHaveLength(1)
+      expect(users[0]).toEqual(user)
+
+      // update the user
+      const updates = { name: 'Updated Name' }
+      await service.update({ id: '1', updated: updates })
+
+      // verify repository was called properly
+      expect(updateSpy).toHaveBeenCalledWith({ id: '1', updated: objectToSnake(updates) })
+
+      // verify user was updated
+      const updatedUsers = await service.getAll()
+      expect(updatedUsers).toHaveLength(1)
+      expect(updatedUsers[0]).toEqual({ ...user, ...updates })
     })
   })
 })
